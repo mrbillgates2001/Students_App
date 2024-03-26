@@ -5,30 +5,27 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Edit = () => {
 	const [show, setShow] = useState(false);
-  const [users, setUsers] = useState([{
+	// const [users, setUsers] = useState("");
+	const [editUser, setEditUser] = useState({
 		name: "",
 		group: "",
 		phone: "",
-	}]);
-	// const [editUser, setEditUser] = useState({
-	// 	name: "",
-	// 	group: "",
-	// 	phone: "",
-	// });
+	});
+	const { id } = useParams();
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+  const navigate = useNavigate();
 
-
-
-	const fetchUsers = async (id) => {
+	const fetchUsers = async () => {
 		try {
-			const response = await axios.get(`http://localhost:3000/users/${id}`);
+			const response = await axios.get(`http://localhost:3000/users/` + id);
 			const data = await response.data;
-			setUsers(data);
+			setEditUser(data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -41,80 +38,72 @@ const Edit = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await axios.put(`http://localhost:3000/users/${id}`, editUser);
-      handleShow()
-			console.log("User added", response.data);
+			const response = await axios.put(
+				`http://localhost:3000/users/` + id,
+				editUser
+			);
+			setEditUser(response.data);
+			handleShow();
+			console.log("User updated", response.data);
 			fetchUsers();
 		} catch (error) {
 			console.log(error.message);
 		} finally {
-			handleClose();
+			navigate('/')
 		}
 	};
 
 	return (
-		<div>
-			<button onClick={handleShow}>
-				Edit
-			</button>
-
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Add a user</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form>
-						<Form.Group className="mb-3" controlId="fullname">
-							<Form.Label>Fullname</Form.Label>
-							<Form.Control
-								// onChange={(e) =>
-								// 	setEditUser({ ...editUser, name: e.target.value })
-								// }
-								value={users.name}
-								type="name"
-								placeholder="John Smith"
-								autoFocus
-							/>
-						</Form.Group>
-						<Form.Group className="mb-3" controlId="group">
-							<Form.Label>Group</Form.Label>
-							<Select
-								// onChange={(e) =>
-								// 	setAddUseer({ ...editUser, group: e.target.value })
-								// }
-								value={users.group}
-								required>
-								<option>Choose your group</option>
-								<option>Group 1</option>
-								<option>Group 2</option>
-								<option>Group 3</option>
-								<option>Group 4</option>
-							</Select>
-						</Form.Group>
-						<Form.Group className="mb-3" controlId="phone">
-							<Form.Label>Phone</Form.Label>
-							<Form.Control
-								type="phone"
-								placeholder="+998(90)-123-45-67"
-								// onChange={(e) =>
-								// 	setAddUseer({ ...editUser, phone: e.target.value })
-								// }
-								value={users.phone}
-								required
-								autoFocus
-							/>
-						</Form.Group>
-					</Form>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-					<Button variant="primary" onClick={handleSubmit}>
-						Save
-					</Button>
-				</Modal.Footer>
-			</Modal>
+		<div className="w-50 h-75 rounded-lg bg-slate-200 mx-auto mt-3 p-5">
+      <h3 className="text-center mb-3">Update user info</h3>
+			<Form onSubmit={handleSubmit}> 
+				<Form.Group className="mb-3" controlId="fullname">
+					<Form.Label>Fullname</Form.Label>
+					<Form.Control
+						onChange={(e) => setEditUser({ ...editUser, name: e.target.value })}
+						value={editUser.name}
+						type="name"
+						placeholder="John Smith"
+						autoFocus
+					/>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="group">
+					<Form.Label>Group</Form.Label>
+					<Select
+						onChange={(e) =>
+							setEditUser({ ...editUser, group: e.target.value })
+						}
+						value={editUser.group}
+						required>
+						<option>Choose your group</option>
+						<option>Group 1</option>
+						<option>Group 2</option>
+						<option>Group 3</option>
+						<option>Group 4</option>
+					</Select>
+				</Form.Group>
+				<Form.Group className="mb-3" controlId="phone">
+					<Form.Label>Phone</Form.Label>
+					<Form.Control
+						type="phone"
+						placeholder="+998(90)-123-45-67"
+						onChange={(e) =>
+							setEditUser({ ...editUser, phone: e.target.value })
+						}
+						value={editUser.phone}
+						required
+						autoFocus
+					/>
+				</Form.Group>
+			</Form>
+			<div className="flex gap-3">
+				<Button variant="secondary" onClick={handleClose}>
+					Close
+				</Button>
+				<Button variant="primary" onClick={handleSubmit}>
+					Save
+				</Button>
+			</div>
 		</div>
 	);
 };
