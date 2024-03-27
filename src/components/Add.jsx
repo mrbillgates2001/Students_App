@@ -17,15 +17,20 @@ const Add = ({ fetchUsers }) => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	const handleSubmit = async (e) => {
+	const handleAddSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			if (input !== "") {
+			if (<Form.Control/> !== "") {
 				const response = await axios.post(
 					"http://localhost:3000/users",
 					addUser
 				);
 				console.log("User added", response.data);
+				setAddUseer( {
+					name: "",
+                    group: "",
+                    phone: "",
+				})
 				fetchUsers();
 			} else {
 				alert ("Please fill in all fields");
@@ -48,7 +53,7 @@ const Add = ({ fetchUsers }) => {
 					<Modal.Title>Add a user</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form onSubmit={handleSubmit}>
+					<Form onSubmit={handleAddSubmit}>
 						<Form.Group className="mb-3" controlId="fullname">
 							<Form.Label>Fullname</Form.Label>
 							<Form.Control
@@ -96,7 +101,7 @@ const Add = ({ fetchUsers }) => {
 					<Button variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
-					<Button variant="primary" onClick={handleSubmit}>
+					<Button variant="primary" onClick={handleAddSubmit}>
 						Save
 					</Button>
 				</Modal.Footer>

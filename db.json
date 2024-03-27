@@ -1,32 +1,8 @@
 {
   "users": [
     {
-      "id": "2",
-      "name": "Ervin Howell Updated",
-      "username": "Antonette",
-      "email": "Shanna@melissa.tv",
-      "group": "Group 4",
-      "address": {
-        "street": "Victor Plains",
-        "suite": "Suite 879",
-        "city": "Wisokyburgh",
-        "zipcode": "90566-7771",
-        "geo": {
-          "lat": "-43.9509",
-          "lng": "-34.4618"
-        }
-      },
-      "phone": "+88984561641",
-      "website": "anastasia.net",
-      "company": {
-        "name": "Deckow-Crist",
-        "catchPhrase": "Proactive didactic contingency",
-        "bs": "synergize scalable supply-chains"
-      }
-    },
-    {
       "id": "3",
-      "name": "Clementine Bauch",
+      "name": "Clementine Bauch ++++",
       "username": "Samantha",
       "email": "Nathan@yesenia.net",
       "group": "Group 4",
@@ -145,30 +121,6 @@
       }
     },
     {
-      "id": "8",
-      "name": "Nicholas Runolfsdottir V",
-      "username": "Maxime_Nienow",
-      "email": "Sherwood@rosamond.me",
-      "group": "Group 2",
-      "address": {
-        "street": "Ellsworth Summit",
-        "suite": "Suite 729",
-        "city": "Aliyaview",
-        "zipcode": "45169",
-        "geo": {
-          "lat": "-14.3990",
-          "lng": "-120.7677"
-        }
-      },
-      "phone": "586.493.6943 x140",
-      "website": "jacynthe.com",
-      "company": {
-        "name": "Abernathy Group",
-        "catchPhrase": "Implemented secondary concept",
-        "bs": "e-enable extensible e-tailers"
-      }
-    },
-    {
       "id": "9",
       "name": "Glenna Reichert",
       "username": "Delphine",
@@ -197,6 +149,18 @@
       "name": "Shohrux Nabiyev",
       "group": "Group 3",
       "phone": "998972639325"
+    },
+    {
+      "id": "a9a4",
+      "name": "Qobilbek",
+      "group": "Group 2",
+      "phone": "+998 97 154 24 05"
+    },
+    {
+      "id": "fbea",
+      "name": "Shahzod Nusratulloyev",
+      "group": "Group 3",
+      "phone": "+88984561641"
     }
   ]
 }
