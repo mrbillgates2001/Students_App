@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Edit = () => {
 	const [show, setShow] = useState(false);
@@ -97,9 +97,9 @@ const Edit = () => {
 				</Form.Group>
 			</Form>
 			<div className="flex gap-3">
-				<Button variant="secondary" onClick={handleClose}>
+				<Link to='/' className="btn btn-secondary" variant="secondary" onClick={handleClose}>
 					Close
-				</Button>
+				</Link>
 				<Button variant="primary" onClick={handleSubmit}>
 					Save
 				</Button>

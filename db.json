@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "3",
-      "name": "Clementine Bauch ++++",
+      "name": "Clementine Bauch ",
       "username": "Samantha",
       "email": "Nathan@yesenia.net",
       "group": "Group 4",
@@ -73,30 +73,6 @@
       }
     },
     {
-      "id": "6",
-      "name": "Mrs. Dennis Schulist",
-      "username": "Leopoldo_Corkery",
-      "email": "Karley_Dach@jasper.info",
-      "group": "Group 1",
-      "address": {
-        "street": "Norberto Crossing",
-        "suite": "Apt. 950",
-        "city": "South Christy",
-        "zipcode": "23505-1337",
-        "geo": {
-          "lat": "-71.4197",
-          "lng": "71.7478"
-        }
-      },
-      "phone": "1-477-935-8478 x6430",
-      "website": "ola.org",
-      "company": {
-        "name": "Considine-Lockman",
-        "catchPhrase": "Synchronised bottom-line interface",
-        "bs": "e-enable innovative applications"
-      }
-    },
-    {
       "id": "7",
       "name": "Kurtis Weissnat",
       "username": "Elwyn.Skiles",
@@ -161,6 +137,24 @@
       "name": "Shahzod Nusratulloyev",
       "group": "Group 3",
       "phone": "+88984561641"
+    },
+    {
+      "id": "9b56",
+      "name": "Shohnur Abdurahimov",
+      "group": "Group 2",
+      "phone": "+998 97 263 93 25"
+    },
+    {
+      "id": "cd93",
+      "name": "Shahboz Nabiyev",
+      "group": "Group 1",
+      "phone": "010-692-6593 updated"
+    },
+    {
+      "id": "a696",
+      "name": "John Smith",
+      "group": "Group 1",
+      "phone": "+998 97 154 24 05"
     }
   ]
 }

@@ -20,7 +20,7 @@ const Add = ({ fetchUsers }) => {
 	const handleAddSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			if (<Form.Control/> !== "") {
+			if (addUser.name !== "" && addUser.phone !== "" && addUser.group !== "") {
 				const response = await axios.post(
 					"http://localhost:3000/users",
 					addUser
@@ -57,6 +57,7 @@ const Add = ({ fetchUsers }) => {
 						<Form.Group className="mb-3" controlId="fullname">
 							<Form.Label>Fullname</Form.Label>
 							<Form.Control
+							id="input"
 								onChange={(e) =>
 									setAddUseer({ ...addUser, name: e.target.value })
 								}
