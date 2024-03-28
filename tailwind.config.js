@@ -6,7 +6,12 @@ export default {
 		"node_modules/flowbite-react/lib/esm/**/*.js",
 	],
 	theme: {
-		extend: {},
+		extend: {
+			spacing: {
+				400: "400px",
+				200: "200px",
+			},
+		},
 	},
 	colors: {
 		bgcolorheader: "#ffe8a3",

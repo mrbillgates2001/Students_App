@@ -1,8 +1,9 @@
-import React from "react";
+import React, { createContext } from "react";
 import { Button, Modal } from "flowbite-react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import Home from "./Home";
 
 const Read = () => {
 	const [openModal, setOpenModal] = useState(false);
@@ -31,14 +32,6 @@ const Read = () => {
 				<p>Group: {users.group}</p>
 				<p>Phone: {users.phone}</p>
 			</div>
-			{/* <Button onClick={() => setOpenModal(true)}>Read</Button> */}
-			{/* <Modal show={openModal} onClose={() => setOpenModal(false)}>
-				<Modal.Header>Detail of User</Modal.Header>
-				<Modal.Body></Modal.Body>
-				<Modal.Footer className="flex justify-end">
-					<Button onClick={() => setOpenModal(false)}>Close</Button>
-				</Modal.Footer>
-			</Modal> */}
 		</div>
 	);
 };

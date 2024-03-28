@@ -1,5 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Table } from "flowbite-react";
+import React, { createContext, useEffect, useState } from "react";
+import {
+	Button,
+	Dropdown,
+	Label,
+	Select,
+	Table,
+	TextInput,
+} from "flowbite-react";
 import axios from "axios";
 
 import {
@@ -17,7 +24,9 @@ import Edit from "./Edit/";
 const Home = () => {
 	const [users, setUsers] = useState([]);
 	const [deleteUser, setDeleteUser] = useState([]);
-	const [show, setShow] = useState(false);
+	const [search, setSearch] = useState("");
+	const [filteredUser, setFilteredUser] = useState(users);
+	const [selectedFilter, setSelectedFilter] = useState("");
 
 	const fetchUsers = async () => {
 		try {
@@ -29,12 +38,23 @@ const Home = () => {
 		}
 	};
 
+
+	const handleFilterChange = (e) => {
+		const filterValue = e.target.value;
+		setSelectedFilter(filterValue);
+
+		if (filterValue === "All Groups") {
+			setFilteredUser(users);
+		} else {
+			const filtered = users.filter((user) => user.group === filterValue);
+			setFilteredUser(filtered);
+		}
+	};
+
 	useEffect(() => {
 		fetchUsers();
-	}, []);
-
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+		setUsers(filteredUser);
+	}, [filteredUser, setUsers]);
 
 	const handleDelete = async (id) => {
 		try {
@@ -49,6 +69,18 @@ const Home = () => {
 			console.log(error.message);
 		}
 	};
+
+	// const searchUsers = async () => {
+	// 	try {
+	//         const response = await axios.get(
+	//             `http://localhost:3000/users?search=${search}`
+	//         );
+	//         const data = await response.data;
+	//         setUsers(data);
+	//     } catch (error) {
+	//         console.log(error);
+	//     }
+	// }
 
 	return (
 		<React.Fragment>
@@ -74,13 +106,29 @@ const Home = () => {
 						<NavbarToggle />
 					</div>
 					<NavbarCollapse>
-						<NavbarLink href="#" active>
-							Home
-						</NavbarLink>
-						<NavbarLink href="#">About</NavbarLink>
-						<NavbarLink href="#">Services</NavbarLink>
-						<NavbarLink href="#">Pricing</NavbarLink>
-						<NavbarLink href="#">Contact</NavbarLink>
+						<div className="flex align-middle gap-2">
+							<TextInput
+								id="search"
+								className="w-400"
+								type="search"
+								placeholder="Search by name..."
+								onChange={(e) => setSearch(e.target.value)}
+							/>
+						</div>
+
+						<div className="max-w-md">
+							<Select
+								value={selectedFilter}
+								onChange={handleFilterChange}
+								id="Filter"
+								required>
+								<option>All Groups</option>
+								<option>Group 1</option>
+								<option>Group 2</option>
+								<option>Group 3</option>
+								<option>Group 4</option>
+							</Select>
+						</div>
 					</NavbarCollapse>
 				</Navbar>
 			</header>
@@ -99,35 +147,77 @@ const Home = () => {
 						</Table.Head>
 
 						<Table.Body className="divide-y">
-							{users.map((user, index) => (
-								<Table.Row
-									key={user.id}
-									className="bg-white dark:border-gray-700 dark:bg-gray-800">
-									<Table.Cell className="p-4">{index + 1}</Table.Cell>
-									<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-										{user.name}
-									</Table.Cell>
-									<Table.Cell>{user.group}</Table.Cell>
-									<Table.Cell>{user.phone}</Table.Cell>
-									<Table.Cell className="flex gap-3">
-										<Link
-											to={`/read/${user.id}`}
-											className="btn btn-sm btn-primary font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-											Read
-										</Link>
-										<Link
-											to={`/edit/${user.id}`}
-											className="btn btn-sm btn-warning font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-											Edit
-										</Link>
-										<Link
-											onClick={() => handleDelete(user.id)}
-											className="btn btn-sm btn-danger font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-											Delete
-										</Link>
-									</Table.Cell>
-								</Table.Row>
-							))}
+							{filteredUser.length > 0
+								? filteredUser
+										.filter((user) => {
+											return search.toLocaleLowerCase() === ""
+												? user
+												: user.name.toLocaleLowerCase().includes(search);
+										})
+										.map((user, index) => (
+											<Table.Row
+												key={user.id}
+												className="bg-white dark:border-gray-700 dark:bg-gray-800">
+												<Table.Cell className="p-4">{index + 1}</Table.Cell>
+												<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+													{user.name}
+												</Table.Cell>
+												<Table.Cell>{user.group}</Table.Cell>
+												<Table.Cell>{user.phone}</Table.Cell>
+												<Table.Cell className="flex gap-3">
+													<Link
+														to={`/read/${user.id}`}
+														className="btn btn-sm btn-primary font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+														Read
+													</Link>
+													<Link
+														to={`/edit/${user.id}`}
+														className="btn btn-sm btn-warning font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+														Edit
+													</Link>
+													<Link
+														onClick={() => handleDelete(user.id)}
+														className="btn btn-sm btn-danger font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+														Delete
+													</Link>
+												</Table.Cell>
+											</Table.Row>
+										))
+								: users
+										.filter((user) => {
+											return search.toLocaleLowerCase() === ""
+												? user
+												: user.name.toLocaleLowerCase().includes(search);
+										})
+										.map((user, index) => (
+											<Table.Row
+												key={user.id}
+												className="bg-white dark:border-gray-700 dark:bg-gray-800">
+												<Table.Cell className="p-4">{index + 1}</Table.Cell>
+												<Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+													{user.name}
+												</Table.Cell>
+												<Table.Cell>{user.group}</Table.Cell>
+												<Table.Cell>{user.phone}</Table.Cell>
+												<Table.Cell className="flex gap-3">
+													<Link
+														to={`/read/${user.id}`}
+														className="btn btn-sm btn-primary font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+														Read
+													</Link>
+													<Link
+														to={`/edit/${user.id}`}
+														className="btn btn-sm btn-warning font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+														Edit
+													</Link>
+													<Link
+														onClick={() => handleDelete(user.id)}
+														className="btn btn-sm btn-danger font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+														Delete
+													</Link>
+												</Table.Cell>
+											</Table.Row>
+										))}
 						</Table.Body>
 					</Table>
 				</div>
