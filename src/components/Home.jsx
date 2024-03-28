@@ -213,17 +213,17 @@ const Home = () => {
 													<Link
 														to={`/read/${user.id}`}
 														className="btn btn-sm btn-primary font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-														Read
+														Read 👁️
 													</Link>
 													<Link
 														to={`/edit/${user.id}`}
 														className="btn btn-sm btn-warning font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-														Edit
+														Edit 📝
 													</Link>
 													<Link
 														onClick={() => handleDelete(user.id)}
 														className="btn btn-sm btn-danger font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-														Delete
+														Delete ⨉
 													</Link>
 												</Table.Cell>
 											</Table.Row>
