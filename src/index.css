@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 a {
-    text-decoration: none !important;
+	text-decoration: none !important;
 }
 
+
+
 body {
-    background-color: #fff2c9 !important;
+	background-color: #fff2c9 !important;
 }

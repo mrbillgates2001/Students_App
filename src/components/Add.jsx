@@ -45,7 +45,7 @@ const Add = ({ fetchUsers }) => {
 	return (
 		<div>
 			<button className="btn btn-success" onClick={handleShow}>
-				Add User ✨
+				Add +
 			</button>
 
 			<Modal show={show} onHide={handleClose}>

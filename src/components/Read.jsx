@@ -24,7 +24,7 @@ const Read = () => {
 
 	return (
 		<div className="flex align-middle justify-center mt-20">
-			<div className="w-50 h-50 bg-red-300 rounded-lg flex align-middle justify-center flex-col  p-10">
+			<div className="w-50 h-50 bg-orange-300 rounded-lg flex align-middle justify-center flex-col  p-10 bg-opacity-80 font-bold">
 				<h1 className="text-center">Details of user</h1>
 				<p>ID: {users.id}</p>
 				<p>Fullname: {users.name}</p>

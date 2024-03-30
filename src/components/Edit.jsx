@@ -54,7 +54,7 @@ const Edit = () => {
 	};
 
 	return (
-		<div className="w-50 h-75 rounded-lg bg-slate-200 mx-auto mt-3 p-5">
+		<div className="w-50 h-75 rounded-lg bg-slate-200 mx-auto mt-3 p-5 bg-opacity-80">
       <h3 className="text-center mb-3">Update user info</h3>
 			<Form onSubmit={handleSubmit}> 
 				<Form.Group className="mb-3" controlId="fullname">
