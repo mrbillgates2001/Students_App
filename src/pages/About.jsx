@@ -5,11 +5,16 @@ const About = () => {
 	return (
 		<div className="container mt-10">
 			<div className="flex items-center justify-between">
-            <h1 className="text-white">About</h1>
-            <Link className="btn btn-warning" to='/'>Back to main page </Link>
-            </div>
+				<h1 className="text-white">About</h1>
+				<Link className="btn btn-warning" to="/">
+					Back to main page{" "}
+				</Link>
+			</div>
 
-            <img src="/about.jpg" alt="" />
+			<div className="flex">
+				<img src="/about.jpg" alt="" width={600} />
+				<span className="flex bg-slate-50 p-5 bg-opacity-70">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem id optio dolores eum repellat perspiciatis pariatur consectetur. Fugit, vitae itaque totam illo accusantium at hic atque ipsum magni necessitatibus iusto excepturi dolorum soluta cumque doloremque. Quisquam maiores quod, delectus quidem sint recusandae accusamus quos ex non, quaerat a mollitia? Dolor modi alias cumque esse inventore.</span>
+			</div>
 			<p className="flex bg-slate-50 p-5 bg-opacity-70">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, fugit
 				voluptas nesciunt consectetur debitis tempore, eius voluptatum modi,

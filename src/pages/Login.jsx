@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 	const { login } = useAuth();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const [data, setData] = useState({
 		username: "",
@@ -14,11 +14,13 @@ const Login = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// console.log(data)
 		if (data.username.length >= 3 && data.password.length >= 3) {
 			login(data);
-			navigate('/')
+			navigate("/");
+		} else {
+			alert("Username and Password must be more than 3 characters");
 		}
+
 		return;
 	};
 

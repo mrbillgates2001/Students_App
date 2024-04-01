@@ -63,12 +63,17 @@ const Home = () => {
 		if (filterValue !== "All Groups") {
 			const filtered = users.filter((user) => user.group === filterValue);
 			setFilteredUser(filtered);
-			fetchUsers()
+			fetchUsers();
 		} else {
 			setFilteredUser(users);
-			fetchUsers()
+			fetchUsers();
 		}
 	};
+
+	// useEffect(() => {
+	// 	fetchUsers();
+	// 	setUsers(filteredUser);
+	// }, [filteredUser, setUsers]);
 
 	useEffect(() => {
 		fetchUsers();
@@ -182,8 +187,8 @@ const Home = () => {
 						</Table.Head>
 
 						<Table.Body className="divide-y bg-opacity-50">
-							{filteredUser.length > 0 
-								? filteredUser 
+							{filteredUser.length > 0
+								? filteredUser
 										.filter((user) => {
 											return search.toLocaleLowerCase() === ""
 												? user
