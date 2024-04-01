@@ -9,23 +9,54 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import Profile from "./pages/Profile";
-
+import { AuthProvider } from "./components/Auth";
+import RequiredAuth from "./components/RequiredAuth";
 
 const App = () => {
 	return (
 		<React.Fragment>
 			<Router>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/add" element={<Add />} />
-					<Route path="/edit/:id" element={<Edit />} />
-					<Route path="/read/:id" element={<Read />} />
-					<Route path="/contacts" element={<Contacts />} />
-					<Route path="/about" element={<About />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/profile" element={<Profile />} />
-					<Route path="*" element={<NotFound />} />
-				</Routes>
+				<AuthProvider>
+					<Routes>
+						<Route
+							path="/"
+							element={
+								<RequiredAuth>
+									<Home />
+								</RequiredAuth>
+							}
+						/>
+						<Route path="/add" element={<Add />} />
+						<Route path="/edit/:id" element={<Edit />} />
+						<Route path="/read/:id" element={<Read />} />
+						<Route
+							path="/contacts"
+							element={
+								<RequiredAuth>
+									<Contacts />
+								</RequiredAuth>
+							}
+						/>
+						<Route
+							path="/about"
+							element={
+								<RequiredAuth>
+									<About />
+								</RequiredAuth>
+							}
+						/>
+						<Route path="/login" element={<Login />} />
+						<Route
+							path="/profile"
+							element={
+								<RequiredAuth>
+									<Profile />
+								</RequiredAuth>
+							}
+						/>
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+				</AuthProvider>
 			</Router>
 		</React.Fragment>
 	);

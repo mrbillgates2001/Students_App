@@ -17,11 +17,12 @@ import {
 	NavbarLink,
 	NavbarToggle,
 } from "flowbite-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, Navigate } from "react-router-dom";
 import Add from "./Add";
 import Read from "./Read/";
 import Edit from "./Edit/";
 import "./Home.css";
+import { useAuth } from "./Auth";
 
 const Home = () => {
 	const [users, setUsers] = useState([]);
@@ -30,6 +31,7 @@ const Home = () => {
 	const [filteredUser, setFilteredUser] = useState(users);
 	const [selectedFilter, setSelectedFilter] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
+	const { userjon, login, logout } = useAuth();
 
 	//////////// DATA FETCHING //////////////
 
@@ -45,11 +47,10 @@ const Home = () => {
 
 	/////////////// PAGINATION //////////////
 
-	const itemsPerPage = 3;
+	const itemsPerPage = 10;
 	const indexOfLastItem = currentPage * itemsPerPage;
 	const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 	const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
-	// const filteredUsers = currentItems
 
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -59,11 +60,13 @@ const Home = () => {
 		const filterValue = e.target.value;
 		setSelectedFilter(filterValue);
 
-		if (filterValue === "All Groups") {
-			setFilteredUser(users);
-		} else {
+		if (filterValue !== "All Groups") {
 			const filtered = users.filter((user) => user.group === filterValue);
 			setFilteredUser(filtered);
+			fetchUsers()
+		} else {
+			setFilteredUser(users);
+			fetchUsers()
 		}
 	};
 
@@ -113,7 +116,7 @@ const Home = () => {
 						</div>
 					</NavbarBrand>
 					<div className="flex md:order-2">
-						<NavbarToggle />
+						<NavbarToggle></NavbarToggle>
 					</div>
 					<NavbarCollapse className="flex items-center justify-center">
 						<div>
@@ -126,16 +129,22 @@ const Home = () => {
 							/>
 						</div>
 						<div className="flex items-center gap-3">
-							<Link to="/">Home</Link>
+							<NavLink to="/">Home</NavLink>
 							<Link to="/about">About</Link>
 							<Link to="/contacts">Contacts</Link>
 						</div>
 
 						<div className="flex items-center">
-							<NavLink to="/profile" className="flex items-center gap-2">
-								<img src="/avatar.png" alt="" width={60} height={60} />
-								<span>Shahboz</span>
-							</NavLink>
+							{userjon ? (
+								<NavLink to="/profile" className="flex items-center gap-2">
+									<img src="/avatar.png" alt="" width={60} height={60} />
+									<span>{userjon.username}</span>
+								</NavLink>
+							) : (
+								<div className="flex items-center gap-3">
+									<Link to="/login">Login</Link>
+								</div>
+							)}
 						</div>
 					</NavbarCollapse>
 				</Navbar>
@@ -173,8 +182,8 @@ const Home = () => {
 						</Table.Head>
 
 						<Table.Body className="divide-y bg-opacity-50">
-							{filteredUser.length > 0
-								? filteredUser
+							{filteredUser.length > 0 
+								? filteredUser 
 										.filter((user) => {
 											return search.toLocaleLowerCase() === ""
 												? user

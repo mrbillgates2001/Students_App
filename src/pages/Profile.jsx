@@ -1,7 +1,16 @@
 import React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../components/Auth";
 
 const Profile = () => {
+	const { userjon, logout } = useAuth();
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		logout();
+		navigate("/login");
+	};
+
 	return (
 		<div className="flex flex-col justify-center items-center mx-auto bg-slate-300 w-50 mt-16 py-10 rounded-full bg-opacity-70">
 			<div className="flex flex-col items-center gap-1">
@@ -11,18 +20,18 @@ const Profile = () => {
 
 			<div className="flex items-center gap-3">
 				<h3>Username: </h3>
-				<h4>Shahboz</h4>
+				<h4>{userjon && userjon.username}</h4>
 			</div>
 
 			<div className="flex items-center gap-3">
 				<h3>Password: </h3>
-				<h4>123465Shah</h4>
+				<h4>{userjon && userjon.password}</h4>
 			</div>
 
 			<div className="flex gap-3">
-				<Link className="btn btn-sm btn-warning" to="/login">
+				<button className="btn btn-sm btn-warning" onClick={handleLogout}>
 					Log out
-				</Link>
+				</button>
 				<Link className="btn btn-sm btn-warning" to="/">
 					Back to main page
 				</Link>

@@ -6,4 +6,14 @@ body {
 
 header a {
     color: black !important;
+    &:focus {
+        color: crimson !important;
+    }
+    &:active {
+        color: crimson !important;
+    }
+    &:first-child {
+        color: crimson !important;
+    }
 }
+
